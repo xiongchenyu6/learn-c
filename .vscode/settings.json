@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "*.json": "jsonc",
+        "gst.h": "c",
+        "webrtc.h": "c"
+    }
+}
