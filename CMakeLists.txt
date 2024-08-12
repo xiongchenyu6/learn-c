@@ -20,7 +20,7 @@ pkg_search_module(json-glib REQUIRED IMPORTED_TARGET json-glib-1.0)
 pkg_search_module(libsoup REQUIRED IMPORTED_TARGET libsoup-2.4)
 
 
-add_executable(${PROJECT_NAME} basic-tutorial-3.c)
+add_executable(${PROJECT_NAME} main.c)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
     PkgConfig::glib

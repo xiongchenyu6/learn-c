@@ -2,6 +2,7 @@
     "files.associations": {
         "*.json": "jsonc",
         "gst.h": "c",
-        "webrtc.h": "c"
+        "webrtc.h": "c",
+        "datachannel.h": "c"
     }
 }
