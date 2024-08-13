@@ -9,7 +9,7 @@
 
   outputs = { nixpkgs, flake-parts, ... }@inputs:
     flake-parts.lib.mkFlake { inherit inputs; } {
-      systems = [ "x86_64-linux" "aarch64-darwin" "x86_64-darwin" ];
+      systems = [ "x86_64-linux" "aarch64-linux" "aarch64-darwin" "x86_64-darwin" ];
       perSystem = { config, self', inputs', pkgs, system, lib, ... }: {
         devShells.default =
           pkgs.mkShell { buildInputs = with pkgs; [ clang bear cmake pcre2 util-linux libselinux libsepol libsysprof-capture libsoup  json-glib sqlite libpsl brotli libunwind elfutils zstd orc glib-networking

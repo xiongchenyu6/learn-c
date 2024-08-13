@@ -119,6 +119,9 @@ const gchar *html_source = " \n \
  \n \
         if (!webrtcPeerConnection) { \n \
           webrtcPeerConnection = new RTCPeerConnection(webrtcConfiguration); \n \
+         webrtcPeerConnection.getReceivers().forEach(receiver => { \n \
+            receiver.playoutDelayHint = 0; \n \
+        }); \n \
           webrtcPeerConnection.ontrack = onAddRemoteStream; \n \
           webrtcPeerConnection.onicecandidate = onIceCandidate; \n \
         } \n \

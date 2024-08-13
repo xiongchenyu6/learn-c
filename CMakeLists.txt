@@ -21,8 +21,19 @@ pkg_search_module(libsoup REQUIRED IMPORTED_TARGET libsoup-2.4)
 
 
 add_executable(${PROJECT_NAME} main.c)
+add_executable(basic-tutorial-3 basic-tutorial-3.c)
 
 target_link_libraries(${PROJECT_NAME} PRIVATE
+    PkgConfig::glib
+    PkgConfig::gstreamer
+    PkgConfig::gstreamer-sdp
+    PkgConfig::gstreamer-rtp
+    PkgConfig::gstreamer-webrtc
+    PkgConfig::json-glib
+    PkgConfig::libsoup
+)
+
+target_link_libraries(basic-tutorial-3 PRIVATE
     PkgConfig::glib
     PkgConfig::gstreamer
     PkgConfig::gstreamer-sdp
