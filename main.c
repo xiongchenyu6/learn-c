@@ -467,7 +467,7 @@ start_pipeline(gboolean create_offer)
                          "queue ! " RTP_CAPS_VP8 "96 ! sendrecv. "
                          "audiotestsrc is-live=true wave=red-noise ! audioconvert ! audioresample ! queue ! opusenc ! rtpopuspay name=audiopay ! "
                          "queue ! " RTP_CAPS_OPUS "97 ! sendrecv. ",
-                         &error);
+                          &error); 
 
     if (error)
     {

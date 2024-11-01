@@ -22,7 +22,7 @@
 #ifdef G_OS_WIN32
 #define VIDEO_SRC "mfvideosrc"
 #else
-#define VIDEO_SRC "v4l2src"
+#define VIDEO_SRC "v4l2src "
 #endif
 
 gchar *video_priority = NULL;
@@ -238,13 +238,15 @@ create_receiver_entry(SoupWebsocketConnection *connection)
                      G_CALLBACK(soup_websocket_message_cb), (gpointer)receiver_entry);
 
     error = NULL;
+
     receiver_entry->pipeline =
         gst_parse_launch("webrtcbin name=webrtcbin " VIDEO_SRC
-                         " ! videorate ! videoscale ! video/x-raw,width=1280,height=720,framerate=30/1 ! videoconvert ! queue max-size-buffers=1 ! x264enc bitrate=6000 speed-preset=ultrafast tune=zerolatency key-int-max=15 ! video/x-h264,profile=constrained-baseline ! queue max-size-time=100000000 ! h264parse ! "
-                         "rtph264pay config-interval=-1 name=payloader aggregate-mode=zero-latency ! "
-                         "application/x-rtp,media=video,encoding-name=H264,payload=" RTP_PAYLOAD_TYPE " ! webrtcbin. "
+                         " ! videorate ! videoscale ! video/x-raw,width=320,height=180,framerate=30/1 ! videoconvert ! queue max-size-buffers=1 ! av1enc cpu-used=32 usage-profile=realtime ! video/x-av1,profile=constrained-baseline ! queue max-size-time=1 ! av1parse ! "
+                         "rtpav1pay ! "
+                         "application/x-rtp,media=video,encoding-name=AV1,payload=" RTP_PAYLOAD_TYPE " ! webrtcbin. "
                          "autoaudiosrc ! queue max-size-buffers=1 leaky=downstream ! audioconvert ! audioresample ! opusenc ! rtpopuspay pt=" RTP_AUDIO_PAYLOAD_TYPE " ! webrtcbin. ",
                          &error);
+
     if (error != NULL)
     {
         g_error("Could not create WebRTC pipeline: %s\n", error->message);
